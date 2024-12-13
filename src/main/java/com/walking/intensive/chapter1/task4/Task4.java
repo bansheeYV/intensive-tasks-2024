@@ -66,6 +66,6 @@ public class Task4 {
             }
         }
 
-        return result; // Заглушка. При реализации - удалить
+        return result;
     }
 }
