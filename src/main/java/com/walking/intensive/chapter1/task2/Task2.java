@@ -72,6 +72,6 @@ public class Task2 {
         } else {
             directionOfMovement = " этаж, справа от лифта, вправо";
         }
-        return flatNumber + " кв - " + currentEntrance + " подъезд, " + currentFloor + directionOfMovement; // Заглушка. При реализации - удалить
+        return flatNumber + " кв - " + currentEntrance + " подъезд, " + currentFloor + directionOfMovement;
     }
 }
