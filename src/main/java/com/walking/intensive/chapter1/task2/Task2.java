@@ -38,6 +38,7 @@ public class Task2 {
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
         String directionOfMovement = "";
+        int numberOfFlats = 4;
         int currentEntrance = 0;
         int currentFloor = 0;
 
@@ -45,33 +46,35 @@ public class Task2 {
             return "Некорректные входные данные";
         }
 
-        if (flatNumber > (floorAmount * entranceAmount * 4)){
+        if (flatNumber > floorAmount * entranceAmount * numberOfFlats){
             return "Такой квартиры не существует";
         }
 
-        int result = flatNumber / (floorAmount * 4);
+        int calculationsOfEntrance = flatNumber / (floorAmount * numberOfFlats);
         if (flatNumber % floorAmount == 0){
-            currentEntrance = result;
+            currentEntrance = calculationsOfEntrance;
         } else {
-            currentEntrance = result + 1;
+            currentEntrance = calculationsOfEntrance + 1;
         }
 
-        result = flatNumber - (floorAmount * 4 * (currentEntrance - 1));
-        if (result % 4 == 0){
-            currentFloor = result / 4;
+        int calculationsOfFloor = flatNumber - floorAmount * numberOfFlats * (currentEntrance - 1);
+        if (calculationsOfFloor % numberOfFlats == 0){
+            currentFloor = calculationsOfFloor / numberOfFlats;
         } else {
-            currentFloor = result / 4 + 1;
+            currentFloor = calculationsOfFloor / numberOfFlats + 1;
         }
 
-        if (flatNumber == 1 || flatNumber % 4 == 1){
-            directionOfMovement = " этаж, слева от лифта, влево";
-        } else if (flatNumber == 2 || flatNumber % 4 == 2){
-            directionOfMovement = " этаж, слева от лифта, вправо";
-        } else if (flatNumber == 3 || flatNumber % 4 == 3) {
-            directionOfMovement = " этаж, справа от лифта, влево";
-        } else {
-            directionOfMovement = " этаж, справа от лифта, вправо";
+        switch (flatNumber % numberOfFlats){
+            case 1: directionOfMovement = " этаж, слева от лифта, влево";
+            break;
+            case 2: directionOfMovement = " этаж, слева от лифта, вправо";
+            break;
+            case 3: directionOfMovement = " этаж, справа от лифта, влево";
+            break;
+            case 0: directionOfMovement = " этаж, справа от лифта, вправо";
+            break;
         }
+
         return flatNumber + " кв - " + currentEntrance + " подъезд, " + currentFloor + directionOfMovement;
     }
 }
