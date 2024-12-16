@@ -126,10 +126,9 @@ public class Task5 {
             return new double[0];
         }
 
-        double angleA = Math.acos((b*b + c*c - a*a)/(2*b*c));
-        double angleB = Math.acos((a*a + c*c - c*c)/(2*a*c));
-        double angleC = Math.acos((a*a + b*b - c*c)/(2*a*b));
-        //double[] angles = new double[]{180*angleA/Math.PI, 180*angleB/Math.PI, 180*angleC/Math.PI};
+        double angleA = Math.acos((b * b + c * c - a * a)/(2 * b * c));
+        double angleB = Math.acos((a * a + c * c - b * b)/(2 * a * c));
+        double angleC = Math.acos((a * a + b * b - c * c)/(2 * a * b));
         double[] angles = new double[]{Math.toDegrees(angleA), Math.toDegrees(angleB), Math.toDegrees(angleC)};
         Arrays.sort(angles);
         return angles;
@@ -147,7 +146,7 @@ public class Task5 {
             return -1;
         }
 
-        return 0;
+        return getAreaByHeron(a, b, c)/((a + b + c)/2);
     }
 
     /**
@@ -158,14 +157,11 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getCircumradius(double a, double b, double c) {
-        if (a < 0 || b < 0 || c < 0){
-            return -1;
-        }
-        if (a + b <= c || b + c <= a || a + c <= b){
+        if (!isTriangleExist(a, b, c)){
             return -1;
         }
 
-        return 0;
+        return (a * b * c) / (getAreaByHeron(a, b, c) * 4);
     }
 
     /**
@@ -183,13 +179,12 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getAreaAdvanced(double a, double b, double c) {
-        if (a < 0 || b < 0 || c < 0){
-            return -1;
-        }
-        if (a + b <= c || b + c <= a || a + c <= b){
+        if (!isTriangleExist(a, b, c)){
             return -1;
         }
 
-        return 0; // Заглушка. При реализации - удалить
+        double cosAngleA = (b * b + c * c - a * a)/(2 * b * c);
+        double sinAngleA = Math.sqrt(1 - cosAngleA * cosAngleA);
+        return (b * c * sinAngleA)/2;
     }
 }
