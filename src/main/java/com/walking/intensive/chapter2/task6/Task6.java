@@ -19,8 +19,11 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getLcm(int m, int n) {
+        if (m < 1 || n < 1){
+            return -1;
+        }
 
-        return 0;
+        return m / getGcd(m, n) * n;
     }
 
     /**
@@ -31,8 +34,18 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcd(int m, int n) {
-        // Ваш код
-        return 0;
+        if (m < 1 || n < 1){
+            return -1;
+        }
+
+        while (m != n){
+            if (m > n){
+                m = m - n;
+            } else {
+                n = n -m;
+            }
+        }
+        return m;
     }
 
     /**
@@ -44,7 +57,18 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcdByEuclideanAlgorithm(int m, int n) {
-        // Ваш код
-        return 0;
+        if (m < 1 || n < 1){
+            return -1;
+        }
+
+        if (m == n){
+            return m;
+        }
+
+        if (m < n){
+            return getGcdByEuclideanAlgorithm(m, n - m);
+        } else {
+            return getGcdByEuclideanAlgorithm(m - n, n);
+        }
     }
 }
