@@ -20,11 +20,24 @@ package com.walking.intensive.chapter2.task8;
  */
 public class Task8 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(getHappyTicketChance());
     }
 
     static double getHappyTicketChance() {
-        // Ваш код
-        return 0.0;
+        int sumHappyTickets = 1;    //учет билета 000 000
+        for (int i = 0; i < 999999; i++) {
+            int firstNumber = i/100000;
+            int secondNumber = (i/10000)%10;
+            int thirdNumber = (i/1000)%10;
+            int fourthNumber = (i/100)%10;
+            int fifthNumber = (i/10)%10;
+            int sixthNumber = i%10;
+
+            if (firstNumber + secondNumber + thirdNumber == fourthNumber + fifthNumber + sixthNumber){
+                sumHappyTickets++;
+            }
+        }
+
+        return (double) sumHappyTickets/(double) 1000000;
     }
 }
