@@ -24,8 +24,9 @@ public class Task8 {
     }
 
     static double getHappyTicketChance() {
-        int sumHappyTickets = 1;    //учет билета 000 000
-        for (int i = 0; i < 999999; i++) {
+        int happyTicketsQuantity = 0;
+
+        for (int i = 0; i <= 999999; i++) {
             int firstNumber = i/100000;
             int secondNumber = (i/10000)%10;
             int thirdNumber = (i/1000)%10;
@@ -33,11 +34,15 @@ public class Task8 {
             int fifthNumber = (i/10)%10;
             int sixthNumber = i%10;
 
-            if (firstNumber + secondNumber + thirdNumber == fourthNumber + fifthNumber + sixthNumber){
-                sumHappyTickets++;
+            if (isHappyTicket(firstNumber, secondNumber, thirdNumber, fourthNumber, fifthNumber, sixthNumber)){
+                happyTicketsQuantity++;
             }
         }
 
-        return (double) sumHappyTickets/(double) 1000000;
+        return (double) happyTicketsQuantity/ 1000000;
+    }
+
+    static boolean isHappyTicket (int first, int second, int third, int fourth, int fifth, int sixth){
+        return (first + second + third == fourth + fifth + sixth);
     }
 }
