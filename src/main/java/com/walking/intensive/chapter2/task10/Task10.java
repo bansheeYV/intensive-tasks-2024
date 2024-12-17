@@ -11,11 +11,21 @@ package com.walking.intensive.chapter2.task10;
  */
 public class Task10 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        String check = "Муза! Ранясь шилом опыта, ты помолишься на разум.";
+        System.out.println(isPalindrome(check));
     }
 
     static boolean isPalindrome(String inputString) {
-        // Ваш код
-        return false;
+        if (inputString == null || inputString.length() < 2 || inputString.equals("") == true){
+            return false;
+        }
+
+        StringBuilder builder = new StringBuilder(removePunctuation(inputString));
+
+        return removePunctuation(inputString).equals(builder.reverse().toString());
+    }
+
+    static String removePunctuation (String string){
+        return string.toLowerCase().replaceAll("[\\p{Punct}\\s]", "");
     }
 }
