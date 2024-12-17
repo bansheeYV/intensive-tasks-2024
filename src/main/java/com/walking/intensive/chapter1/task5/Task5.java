@@ -28,11 +28,7 @@ public class Task5 {
     }
 
     static boolean isTriangleExist (double a, double b, double c){
-        if (a < 0 || b < 0 || c < 0){
-            return false;
-        }
-
-        return (a + b > c && b + c > a && a + c > b);
+        return a + b > c && b + c > a && a + c > b && a > 0 && b > 0 && c > 0;
     }
 
     /**
@@ -49,7 +45,8 @@ public class Task5 {
             return -1;
         }
 
-        return 0.25 * Math.sqrt(4 * a * a * b * b - (a * a + b * b - c * c) * (a * a + b * b - c * c));
+        double halfPerimetr = (a + b + c)/2;
+        return Math.sqrt(halfPerimetr * (halfPerimetr - a) * (halfPerimetr - b) * (halfPerimetr - c));
     }
 
     /**
@@ -64,11 +61,9 @@ public class Task5 {
             return new double[0];
         }
 
-        double halfPerimetr = (a + b + c)/2;
-        double sqrtParametrs = Math.sqrt(halfPerimetr * (halfPerimetr - a) * (halfPerimetr - b) * (halfPerimetr - c));
-        double height1 = (2/a) * sqrtParametrs;
-        double height2 = (2/b) * sqrtParametrs;
-        double height3 = (2/c) * sqrtParametrs;
+        double height1 = (2/a) * getAreaByHeron(a, b, c);
+        double height2 = (2/b) * getAreaByHeron(a, b, c);
+        double height3 = (2/c) * getAreaByHeron(a, b, c);
         double[] heights = new double[]{height1, height2, height3};
         Arrays.sort(heights);
         return heights;
@@ -161,7 +156,7 @@ public class Task5 {
             return -1;
         }
 
-        return (a * b * c) / (getAreaByHeron(a, b, c) * 4);
+        return a * b * c / (getAreaByHeron(a, b, c) * 4);
     }
 
     /**
@@ -185,6 +180,6 @@ public class Task5 {
 
         double cosAngleA = (b * b + c * c - a * a)/(2 * b * c);
         double sinAngleA = Math.sqrt(1 - cosAngleA * cosAngleA);
-        return (b * c * sinAngleA)/2;
+        return b * c * sinAngleA/2;
     }
 }
