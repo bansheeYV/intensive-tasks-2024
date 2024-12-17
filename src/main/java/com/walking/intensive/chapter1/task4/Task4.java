@@ -56,10 +56,6 @@ public class Task4 {
 
         double x1 = ((-b - Math.sqrt(discriminant)) / (2 * a));
         double x2 = ((-b + Math.sqrt(discriminant)) / (2 * a));
-        if (x1 < x2){
-            return "Количество решений: 2. Корни: " + x1 + ";" + x2;
-        } else {
-            return "Количество решений: 2. Корни: " + x2 + ";" + x1;
-        }
+        return "Количество решений: 2. Корни: " + Math.min(x1, x2) + ";" + Math.max(x1, x2);
     }
 }
