@@ -65,11 +65,9 @@ public class Task9 {
         String currentStringTriangle = "";
 
         for (int i = 1; i <= n; i++) {
-            int lengthOfEmptyString = lastStringTriangle.length() - getStringsTriangle(i).length();
-            for (int j = 0; j < lengthOfEmptyString/2; j++) {
-                builder.append(" ");
-            }
-            currentStringTriangle += builder.toString() + getStringsTriangle(i) + "\n";
+            int lengthOfEmptyString = (lastStringTriangle.length() - getStringsTriangle(i).length())/2;
+            builder.repeat(" ", lengthOfEmptyString);
+            currentStringTriangle += builder + getStringsTriangle(i) + "\n";
             builder.replace(0, lengthOfEmptyString, "");
         }
 
