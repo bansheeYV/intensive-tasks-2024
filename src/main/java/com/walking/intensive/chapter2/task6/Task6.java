@@ -8,7 +8,7 @@ package com.walking.intensive.chapter2.task6;
  */
 public class Task6 {
     public static void main(String[] args) {
-        System.out.println(getGcdByEuclideanAlgorithm(0, 20));
+        System.out.println(getGcdByEuclideanAlgorithm(5, 7));
     }
 
     /**
@@ -19,7 +19,7 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getLcm(int m, int n) {
-        if (m < 1 || n < 1){
+        if (!isValid(m, n)){
             return -1;
         }
 
@@ -34,7 +34,7 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcd(int m, int n) {
-        if (m < 1 || n < 1){
+        if (!isValid(m, n)){
             return -1;
         }
 
@@ -58,14 +58,22 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcdByEuclideanAlgorithm(int m, int n) {
-        if (m < 0 || n < 0){    // или условие менять на (m < 1 || n < 1)
-            return -1;          // чтобы корректно возвращать -1 или
+        if (!isValid(m, n)){
+            return -1;
         }
 
-        if (m == 0){            // я не знаю как вернуть -1 для теста (0, 20), если у нас
-            return n;           // здесь проверка на 0 возвращает n
+        return recursion(m, n);
+    }
+
+    static boolean isValid (int m, int n){
+        return (m > 0 && n > 0);
+    }
+
+    static int recursion(int m, int n) {
+        if (m == 0){
+            return n;
         }
 
-        return getGcdByEuclideanAlgorithm(n % m, m);
+        return recursion(n % m, m);
     }
 }
