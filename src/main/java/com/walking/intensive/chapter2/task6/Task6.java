@@ -8,7 +8,7 @@ package com.walking.intensive.chapter2.task6;
  */
 public class Task6 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(getGcdByEuclideanAlgorithm(0, 20));
     }
 
     /**
@@ -42,9 +42,10 @@ public class Task6 {
             if (m > n){
                 m = m - n;
             } else {
-                n = n -m;
+                n = n - m;
             }
         }
+
         return m;
     }
 
@@ -57,18 +58,14 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcdByEuclideanAlgorithm(int m, int n) {
-        if (m < 1 || n < 1){
-            return -1;
+        if (m < 0 || n < 0){    // или условие менять на (m < 1 || n < 1)
+            return -1;          // чтобы корректно возвращать -1 или
         }
 
-        if (m == n){
-            return m;
+        if (m == 0){            // я не знаю как вернуть -1 для теста (0, 20), если у нас
+            return n;           // здесь проверка на 0 возвращает n
         }
 
-        if (m < n){
-            return getGcdByEuclideanAlgorithm(m, n - m);
-        } else {
-            return getGcdByEuclideanAlgorithm(m - n, n);
-        }
+        return getGcdByEuclideanAlgorithm(n % m, m);
     }
 }
