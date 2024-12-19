@@ -26,6 +26,17 @@ public class Task10 {
     }
 
     static String removePunctuation (String string){
-        return string.toLowerCase().replaceAll("[\\p{Punct}\\s]", "");
+        String withoutPunctuation = "";
+
+        for (int i = 0; i < string.length(); i++) {
+            String checkSymbol = string.toLowerCase().substring(i, i + 1);
+            if (!checkSymbol.equals("!") && !checkSymbol.equals("?") && !checkSymbol.equals(".")
+                    && !checkSymbol.equals(",") && !checkSymbol.equals(":") && !checkSymbol.equals("-")
+                    && !checkSymbol.equals(" ") && !checkSymbol.equals(";")){
+                withoutPunctuation += checkSymbol;
+            }
+        }
+
+        return withoutPunctuation;
     }
 }
