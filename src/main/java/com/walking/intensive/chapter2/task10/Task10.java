@@ -13,16 +13,17 @@ public class Task10 {
     public static void main(String[] args) {
         String check = "Муза! Ранясь шилом опыта, ты помолишься на разум.";
         System.out.println(isPalindrome(check));
+        System.out.println(isPalindromeAlternative(check));
     }
 
     static boolean isPalindrome(String inputString) {
-        if (inputString == null || inputString.length() < 2 || inputString.isEmpty()){
+        if (inputString == null || inputString.length() < 2){
             return false;
         }
 
         StringBuilder builder = new StringBuilder(removePunctuation(inputString));
 
-        return removePunctuation(inputString).equals(builder.reverse().toString());
+        return removePunctuation(inputString).contentEquals(builder.reverse());
     }
 
     static String removePunctuation (String string){
@@ -38,5 +39,37 @@ public class Task10 {
         }
 
         return withoutPunctuation;
+    }
+
+    static boolean isPalindromeAlternative(String inputString) {
+        if (inputString == null || inputString.length() < 2){
+            return false;
+        }
+
+        int i = 0;
+        int j = inputString.length() - 1;
+
+        while (i <= j) {
+            char checkCharLeft = inputString.toLowerCase().charAt(i);
+            char checkCharRight = inputString.toLowerCase().charAt(j);
+            if (!Character.isLetter(checkCharLeft)) {
+                i++;
+                continue;
+            }
+
+            if (!Character.isLetter(checkCharRight)) {
+                j--;
+                continue;
+            }
+
+            if (checkCharLeft != checkCharRight) {
+                return false;
+            }
+
+            i++;
+            j--;
+        }
+
+        return true;
     }
 }
