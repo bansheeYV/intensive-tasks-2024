@@ -47,16 +47,11 @@ public class Task12 {
     }
 
     static int[] getMovementsNumber(String baskets) {
-        int[] originalNumbersSet = new int[baskets.length()];
 
         for (int i = 0; i < baskets.length(); i++) {
-            char currentChar = baskets.charAt(i);
-
-            if (!Character.isDigit(currentChar) || Integer.parseInt(String.valueOf(currentChar)) > 1) {
+            if (!Character.isDigit(baskets.charAt(i)) || Integer.parseInt(String.valueOf(baskets.charAt(i))) > 1) {
                 return new int[]{};
             }
-
-            originalNumbersSet[i] = Integer.parseInt(String.valueOf(currentChar));
         }
 
         int[] movementsNumber = new int[baskets.length()];
@@ -64,7 +59,9 @@ public class Task12 {
         for (int i = 0; i < baskets.length(); i++) {
 
             for (int j = 0; j < baskets.length(); j++) {
-                movementsNumber[i] += originalNumbersSet[j] * Math.abs(i - j);
+                if (baskets.charAt(j) == '1') {
+                    movementsNumber[i] += Math.abs(i - j);
+                }
             }
         }
 
