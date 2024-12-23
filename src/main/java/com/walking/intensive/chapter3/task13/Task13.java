@@ -49,11 +49,49 @@ package com.walking.intensive.chapter3.task13;
  */
 public class Task13 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        int[] plants = new int[] {2,2,3,3};
+        int wateringCanVolume = 5;
+        System.out.println(getStepsCount(plants, wateringCanVolume));
     }
 
     static int getStepsCount(int[] plants, int wateringCanVolume) {
-        // Ваш код
-        return 0;
+        if (!isValid(plants, wateringCanVolume)) {
+            return -1;
+        }
+
+        if (plants.length == 0) {
+            return 0;
+        }
+
+        int stepsCount = 0;
+        int currentVolumeOfWater = wateringCanVolume;
+
+        for (int i = 0; i < plants.length; i++) {
+
+            currentVolumeOfWater -= plants[i];
+            stepsCount++;
+
+            if (i < plants.length - 1 && currentVolumeOfWater < plants[i + 1]) {
+                stepsCount += (i + 1) * 2;
+                currentVolumeOfWater = wateringCanVolume;
+            }
+        }
+
+        return stepsCount;
+    }
+
+    static boolean isValid(int[] plants, int wateringCanVolume) {
+
+        for (int i = 0; i < plants.length; i++) {
+            if (plants[i] < 1) {
+                return false;
+            }
+        }
+
+        if (wateringCanVolume < 1) {
+            return false;
+        }
+
+        return true;
     }
 }
